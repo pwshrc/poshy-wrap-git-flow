@@ -7,6 +7,13 @@ if (-not (Test-Command git-flow)) {
     return
 }
 
+[string] $git_bin = $null
+if (Test-Command hub) {
+    $git_bin = "hub"
+} elseif (Test-Command git) {
+    $git_bin = "git"
+}
+
 function Use-GitFlowBranchDevelop {
     & $git_bin checkout (git config gitflow.branch.develop) @args
 }
